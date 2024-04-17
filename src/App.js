@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import CurrencyInput from "./components/CurrencyInput";
+import Result from "./components/Result";
+import styled from 'styled-components';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Border>
+      <CurrencyInput/>
+      <Result/>
+      </Border>
+    </Container>
   );
 }
 
 export default App;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;  
+`;
+
+const Border = styled.div`
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  width: 400px;
+  height: 500px
+`;
