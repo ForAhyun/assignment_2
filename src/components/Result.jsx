@@ -4,6 +4,7 @@ import { COUNTRY_LIST } from "../utils/list";
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from "react";
 import styled from 'styled-components';
+import { handleCurrencyChange } from "../redux/shared/currencyExchange";
 
 const Result = () => {
 
@@ -16,14 +17,15 @@ const Result = () => {
     const handleClickCountry = (e) => {
         setClickedCountry(e.target.textContent);
         dispatch(setSelectedToCountry(e.target.textContent));
-        dispatch(currencyExchange({ 
-                        amount: amount, 
-                        from: selectedFromCountry, 
-                        to: e.target.textContent 
-                        })).then((response) => {
-                        console.log("Exchange result:", response);
-                    });
-        //handleCurrencyExchange(amount, selectedCountry, e.target.textContent);
+        handleCurrencyChange(dispatch, amount, selectedFromCountry, e.target.textContent);
+        // dispatch(currencyExchange({ 
+        //                 amount: amount, 
+        //                 from: selectedFromCountry, 
+        //                 to: e.target.textContent 
+        //                 })).then((response) => {
+        //                 console.log("Exchange result:", response);
+        //             });
+        
         
     }
 

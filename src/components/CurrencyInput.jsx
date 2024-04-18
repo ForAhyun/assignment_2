@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import { useDispatch , useSelector} from 'react-redux';
 import { currencyExchange, setAmount, setSelectedFromCountry } from "../redux/slice/currencySlice";
 import styled from 'styled-components';
+import { handleCurrencyChange } from "../redux/shared/currencyExchange";
 
 
 const CurrencyInput = () => {
@@ -28,29 +29,26 @@ const CurrencyInput = () => {
         setFormattedValue(formatNumber(value));
       }, [value]);
 
+    // const handleCurrencyExchange = (amount, from, to) => {
+    //     dispatch(currencyExchange({ 
+    //         amount: amount, 
+    //         from: from, 
+    //         to: to 
+    //         })).then((response) => {
+    //         console.log("Exchange result:", response);
+    //     });
+    // }
+
     const handleChangeCountry = (e) => {
         setCoutry(e.target.value);
         dispatch(setSelectedFromCountry(e.target.value));
-     
-        dispatch(currencyExchange({ 
-            amount: amount, 
-            from: e.target.value, 
-            to: selectedToCountry
-            })).then((response) => {
-            console.log("Exchange result:", response);
-        });
+        handleCurrencyChange(dispatch, amount, e.target.value, selectedToCountry);
     };
 
     const handleInputChange = (e) => {
         setValue(e.target.value);
         dispatch(setAmount(e.target.value));
-        dispatch(currencyExchange({ 
-            amount: e.target.value, 
-            from: selectedFromCountry, 
-            to: selectedToCountry
-            })).then((response) => {
-            console.log("Exchange result:", response);
-        });
+        handleCurrencyChange(dispatch, e.target.value, selectedFromCountry, selectedToCountry);
     }
 
     return (
