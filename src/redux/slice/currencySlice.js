@@ -1,19 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import requestCalc from '../../network/axios';
 
-export const currencyExchange = createAsyncThunk(
-    'currency/exchange',
-    async ({ amount, from, to }) => {
-      try {
-        const response = await requestCalc(`convert?to=${to}&from=${from}&amount=${amount}`);
-        console.log("currency exchange>>>>>",response.data);
-        return response.data;
-      } catch (error) {
-        throw error;
-      }
-    }
-  );
-
 const initialState = {
     amount: 0, 
     selectedFromCountry: 'USD',
@@ -41,6 +28,19 @@ export const currencySlice = createSlice({
         });
     },
 });
+
+export const currencyExchange = createAsyncThunk(
+    'currency/exchange',
+    async ({ amount, from, to }) => {
+      try {
+        const response = await requestCalc(`convert?to=${to}&from=${from}&amount=${amount}`);
+        console.log("currency exchange>>>>>",response.data);
+        return response.data;
+      } catch (error) {
+        throw error;
+      }
+    }
+  );
 
 
 export const {setAmount, setSelectedFromCountry, setSelectedToCountry} = currencySlice.actions;

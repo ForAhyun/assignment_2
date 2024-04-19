@@ -11,10 +11,8 @@ import axios from "axios";
         }
     });
 
-    //if(url === "/") return;
-
     response = await instance.get(url);
-    //console.log('g>>>', response.data);
+    
     return response;
     
 }

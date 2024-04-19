@@ -1,7 +1,7 @@
 import { COUNTRY_LIST } from "../utils/list";
 import {useState, useEffect} from "react";
 import { useDispatch , useSelector} from 'react-redux';
-import { currencyExchange, setAmount, setSelectedFromCountry } from "../redux/slice/currencySlice";
+import { setAmount, setSelectedFromCountry } from "../redux/slice/currencySlice";
 import styled from 'styled-components';
 import { handleCurrencyChange } from "../redux/shared/currencyExchange";
 
@@ -28,16 +28,6 @@ const CurrencyInput = () => {
         };
         setFormattedValue(formatNumber(value));
       }, [value]);
-
-    // const handleCurrencyExchange = (amount, from, to) => {
-    //     dispatch(currencyExchange({ 
-    //         amount: amount, 
-    //         from: from, 
-    //         to: to 
-    //         })).then((response) => {
-    //         console.log("Exchange result:", response);
-    //     });
-    // }
 
     const handleChangeCountry = (e) => {
         setCoutry(e.target.value);

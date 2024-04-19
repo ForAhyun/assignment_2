@@ -1,4 +1,4 @@
-import { currencyExchange, setSelectedToCountry } from "../redux/slice/currencySlice";
+import { setSelectedToCountry } from "../redux/slice/currencySlice";
 import { convertDate } from "../utils/date";
 import { COUNTRY_LIST } from "../utils/list";
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,15 +18,6 @@ const Result = () => {
         setClickedCountry(e.target.textContent);
         dispatch(setSelectedToCountry(e.target.textContent));
         handleCurrencyChange(dispatch, amount, selectedFromCountry, e.target.textContent);
-        // dispatch(currencyExchange({ 
-        //                 amount: amount, 
-        //                 from: selectedFromCountry, 
-        //                 to: e.target.textContent 
-        //                 })).then((response) => {
-        //                 console.log("Exchange result:", response);
-        //             });
-        
-        
     }
 
     return (
@@ -36,7 +27,7 @@ const Result = () => {
                 <CountryBtn 
                     key={index} 
                     onClick={handleClickCountry}
-                    clicked={clickedCountry === country}
+                    clicked={(clickedCountry === country).toString()}
                     className={index === otherCountries.length - 1 ? "lastButton" : ""}
                     >
                         {country}
@@ -71,7 +62,7 @@ const CountryBtn = styled.button`
     border: 1px solid black;
     background-color: white;
     border-right: none;
-    border-bottom: ${props => props.clicked ? 'none' : '1px solid black'};
+    border-bottom: ${props => props.clicked === 'true' ? 'none' : '1px solid black'};
     &.lastButton {
         border-right: 1px solid black;
     }
